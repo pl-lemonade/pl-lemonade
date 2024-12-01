@@ -89,8 +89,13 @@
 </script>
     </head>
     <body>
+        <div id="enter-overlay">
+            <div>
+              <p>Click to Enter</p>
+            </div>
+        </div>
         <video autoplay loop muted playsinline class="background-video">
-            <source src="https://pl-lemonade.github.io/pl-lemonade/media/winter-evening.1920x1080.mp4" type="video/mp4">
+            <source src="https://pl-lemonade.github.io/pl-lemonade/media/winter-camping-wallpaperwaifu-com.mp4" type="video/mp4">
         </video>
         <div style="position: absolute; top: 0; height: 100%; width: 100%;" id="particles-js">
             <div class="boxes">
@@ -164,5 +169,18 @@
                 window.location.href = link2URL;
             });
         </script>
+        <script>
+            var audio = new Audio('media/campfirefireplace-crackling-268525.mp3'); // Replace with your audio file path
+            audio.loop = true;
+            audio.volume = 0.5;
+        
+            document.getElementById('enter-overlay').addEventListener('click', function() {
+              audio.play().catch(function(error) {
+                console.error("Error playing audio:", error);
+              });
+        
+              document.getElementById('enter-overlay').classList.add('fade-out');
+            });
+          </script>
     </body>
 </html>
