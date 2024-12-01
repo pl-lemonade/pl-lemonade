@@ -47,11 +47,16 @@ div.box {
     background-color: rgba(42, 42, 42, 0.6);
     margin-top: 40px;
     border-radius: 20px;
-    box-shadow: 0 0 40px 10px rgba(176, 82, 29, 0.6);
-    border: 1px solid #E75A0A;
     backdrop-filter: blur(2px);
-    animation: borderChange 8s linear infinite;
     padding-bottom: 10px;
+    /* box-shadow: 0 0 40px 10px rgba(176, 82, 29, 0.6);
+     border: 1px solid #E75A0A;
+     animation: borderChange 8s linear infinite; */
+
+    /*winter*/
+    box-shadow: 0 0 40px 10px rgba(26, 109, 176, 0.6);
+    border: 1px solid #7ab3ef;
+    animation: winter 6s linear infinite;
 }
 
 @keyframes borderChange {
@@ -69,6 +74,24 @@ div.box {
     }
     100% {
         border-color: #E75A0A;
+    }
+}
+
+@keyframes winter {
+    0% {
+        border-color: #7ab3ef;
+    }
+    25% {
+        border-color: #bedaf7;
+    }
+    50% {
+        border-color: #deecfb;
+    }
+    75% {
+        border-color: #bedaf7;
+    }
+    100% {
+        border-color: #7ab3ef;
     }
 }
 
