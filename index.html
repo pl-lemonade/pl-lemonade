@@ -214,7 +214,7 @@
                     return;
                 }
                 try {
-                    const response = await fetch("/media/iata-icao.csv");
+                    const response = await fetch("media/iata-icao.csv");
                     const csvData = await response.text();
                     const rows = csvData.split('\n');
                     
