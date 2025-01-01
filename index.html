@@ -82,23 +82,24 @@
 </script>
     </head>
     <body>
-        <div id="enter-overlay">
+        <!--<div id="enter-overlay">
             <div>
               <p>Click to Enter</p>
             </div>
-        </div>
-        <video autoplay loop muted playsinline class="background-video">
-            <source src="https://pl-lemonade.github.io/pl-lemonade/media/winter-camping-wallpaperwaifu-com.mp4" type="video/mp4">
+        </div>-->
+        <!--<video autoplay loop muted playsinline class="background-video">
+            <source src="https://pl-lemonade.github.io/pl-lemonade/media/winter-camping-wallpaperwaifu-com.mp4" type="video/mp4">-->
+            <img src="media/img-def-bg.png" class="background-image">
             <!--
             https://ibb.co/GHLqYQD
             https://ibb.co/0f5X7Q8
-            -->
-        </video>
+            
+        </video>-->
         <div style="position: absolute; top: 0; height: 100%; width: 100%;" id="particles-js">
             <div class="boxes">
                 <div class="box">
                     <div class="top">
-                        <pst>Lemonade</pst>
+                        <p class="pst">Lemonade</p>
                         <br>
                         <img class="tav" src="https://pl-lemonade.github.io/pl-lemonade/media/images-_1_.png">
                         <br>
@@ -123,6 +124,8 @@
                         <p class="pd">full stack dev & aviation enthusiast</p>
                         <br>
                         <p class="pd"><b style="background: linear-gradient(to top right, #870096, #e89bcb); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">twist your life around</b>💝</p> <!-- twist your life around pink (le)-->
+                        <br>
+                        <a href="https://github.com/KaladinDMP/AGBrowser"><p class="pd">Armgddn for pirated games.</p></a>
                         <br>
                         <div class="volanta-activity">
                             <div class="volanta-box">
@@ -190,7 +193,7 @@
                 window.location.href = link3URL;
             });
         </script>
-        <script>
+        <!--<script>
             var audio = new Audio('media/campfirefireplace-crackling-268525.mp3');
             audio.loop = true;
             audio.volume = 0.5;
@@ -202,7 +205,7 @@
         
               document.getElementById('enter-overlay').classList.add('fade-out');
             });
-          </script>
+          </script>-->
           <script>
             const url = "https://elaborate-pasca-31bf04.netlify.app/.netlify/functions/volanta-proxy";
             const targetUser = "kebinii";
@@ -214,7 +217,7 @@
                     return;
                 }
                 try {
-                    const response = await fetch("media/iata-icao.csv");
+                    const response = await fetch("/media/iata-icao.csv");
                     const csvData = await response.text();
                     const rows = csvData.split('\n');
                     
@@ -283,7 +286,7 @@
                         document.querySelector('.c6').textContent = originName;
                         document.querySelector('.c7').textContent = destinationIcao;
                         document.querySelector('.c8').textContent = destinationName;
-                        document.querySelector('.c10').textContent = `${position.altitude} FT ${verticalSpeed}`;
+                        document.querySelector('.c10').textContent = `${position.altitude} FT`;
                         document.querySelector('.c11').textContent = flightStatus;
             
                         userDataContainer.textContent = JSON.stringify(user, null, 2);
