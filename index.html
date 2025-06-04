@@ -80,22 +80,24 @@
         document.getElementById('visitor-count').innerText = `${visitorCount}`;
     });
 </script>
+<script src="https://kit.fontawesome.com/1304c38665.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     </head>
     <body>
-        <!--<div id="enter-overlay">
+        <div id="enter-overlay">
             <div>
               <p>Click to Enter</p>
             </div>
-        </div>-->
-        <!--<video autoplay loop muted playsinline class="background-video">
-            <source src="https://pl-lemonade.github.io/pl-lemonade/media/winter-camping-wallpaperwaifu-com.mp4" type="video/mp4">-->
+        </div>
+        <video autoplay loop muted playsinline class="background-video">
+            <source src="/media/IN DA PARTY - CT.mp4" type="video/mp4">
             <img src="media/img-def-bg.png" class="background-image">
             <!--
             https://ibb.co/GHLqYQD
-            https://ibb.co/0f5X7Q8
+            https://ibb.co/0f5X7Q8 -->
             
-        </video>-->
-        <div style="position: absolute; top: 0; height: 100%; width: 100%;" id="particles-js">
+        </video>
+        <!--<div style="position: absolute; top: 0; height: 100%; width: 100%;" id="particles-js">-->
             <div class="boxes">
                 <div class="box">
                     <div class="top">
@@ -109,7 +111,7 @@
                         </div>
                         <div class="time">
                             <img src="media/time.png">
-                            <p id="utcTime">20:42 UTC</p>
+                            <p id="utcTime">20:42 GMT</p>
                         </div>
                         <div class="nat">
                             <img src="media/nat.png">
@@ -160,8 +162,13 @@
                         <div><img src="media/eye.png" class="imeye"><p id="visitor-count"> 0</p></div>
                     </div>
                 </div>
+                <div class="audiobox">
+                    <i id="back-button" class="fa-solid fa-arrow-left"></i>
+                    <i id="volume-button" class="fa-solid fa-volume-high"></i>
+                    <a href="https://open.spotify.com/artist/3hGJ4nHdF99Vs0gQdXz5Nw">In Da Party - smokedope2016</a>
+                </div>
             </div>
-        <script src="particles.js"></script>
+        <!--<script src="particles.js"></script>-->
         <script src="App.js"></script>
         <script>
             function updateTime() {
@@ -193,19 +200,23 @@
                 window.location.href = link3URL;
             });
         </script>
-        <!--<script>
-            var audio = new Audio('media/campfirefireplace-crackling-268525.mp3');
+        <script>
+            var audio = new Audio('media/IN DA PARTY - CT.mp4');
             audio.loop = true;
             audio.volume = 0.5;
         
-            document.getElementById('enter-overlay').addEventListener('click', function() {
-              audio.play().catch(function(error) {
-                console.error("Error playing audio:", error);
-              });
-        
-              document.getElementById('enter-overlay').classList.add('fade-out');
-            });
-          </script>-->
+            document.getElementById('enter-overlay').addEventListener('click', function () {
+    const video = document.querySelector('.background-video');
+    video.currentTime = 0;
+    video.play();
+
+    audio.play().catch(function (error) {
+        console.error("Error playing audio:", error);
+    });
+
+    document.getElementById('enter-overlay').classList.add('fade-out');
+});
+          </script>
           <script>
             const url = "https://elaborate-pasca-31bf04.netlify.app/.netlify/functions/volanta-proxy";
             const targetUser = "kebinii";
@@ -307,6 +318,27 @@
             
             fetchVolantaData();
             setInterval(fetchVolantaData, 20000);
-        </script>                               
+        </script>     
+        <script>
+    document.getElementById("back-button").addEventListener("click", function () {
+        window.location.href = "/archived/220525/";
+    });
+
+    const volumeButton = document.getElementById("volume-button");
+    let isMuted = false;
+
+    volumeButton.addEventListener("click", function () {
+        isMuted = !isMuted;
+        audio.muted = isMuted;
+
+        if (isMuted) {
+            volumeButton.classList.remove("fa-volume-high");
+            volumeButton.classList.add("fa-volume-off");
+        } else {
+            volumeButton.classList.remove("fa-volume-off");
+            volumeButton.classList.add("fa-volume-high");
+        }
+    });
+</script>                          
     </body>
 </html>

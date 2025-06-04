@@ -43,7 +43,7 @@ body {
     width: auto;
     height: auto;
     z-index: -1;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .background-image {
@@ -73,7 +73,7 @@ body {
     backdrop-filter: blur(20px);
 
     p {
-        color: #deecfb;
+        color: #EB940A;
         font-family: "Autography";
         font-size: 50px;
     }
@@ -180,7 +180,7 @@ p.pst {
     box-shadow: 0 0 20px 5px rgba(209, 188, 168, 0.4);
 }
 
-p {
+p, a {
     color: #fff;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 20px;
@@ -193,6 +193,10 @@ p {
 .pd {
     position: relative;
     top: -20px;
+}
+
+.pd a {
+    font-size: 20px;
 }
 
 .loc {
@@ -396,4 +400,24 @@ p.c11 {
     position: absolute;
     top: 42px;
     transform: translateX(-50%);
+}
+
+.audiobox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px;
+}
+
+.audiobox i {
+    font-size: 25px;
+    margin-right: 20px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.audiobox p, a {
+    font-size: 25px;
+    color: #fff;
+    text-decoration: none;
 }
