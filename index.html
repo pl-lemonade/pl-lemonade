@@ -103,31 +103,32 @@
                     <div class="top">
                         <p class="pst">Lemonade</p>
                         <br>
-                        <img class="tav" src="https://pl-lemonade.github.io/pl-lemonade/media/images-_1_.png">
-                        <br>
-                        <div class="loc">
-                            <img src="media/loc.png">
+                        <!--<img class="tav" src="https://pl-lemonade.github.io/pl-lemonade/media/images-_1_.png">-->
+                        <div class="info">
+                        <div class="section">
+                            <i class="fa-solid fa-location-dot"></i>
                             <p>Ireland</p>
                         </div>
-                        <div class="time">
-                            <img src="media/time.png">
+                        <div class="section">
+                            <i class="fa-solid fa-clock"></i>
                             <p id="utcTime">20:42 GMT</p>
                         </div>
-                        <div class="nat">
-                            <img src="media/nat.png">
-                            <p><img src="media/ei-flag.gif" class="imnat" style="margin-right: 10px;"><img src="media/pl-flag.gif" class="imnat"></p>
+                        <div class="section">
+                            <i class="fa-solid fa-globe"></i>
+                            <p><img src="media/ei-flag.gif"><img src="media/pl-flag.gif"></p>
                         </div>
-                        <div class="code">
-                            <img src="media/code.png" class="imcode">
-                            <p><img src="media/html+css.png" class="imlang"></p>
+                        <div class="section">
+                            <i class="fa-solid fa-terminal"></i>
+                            <p><i class="fa-brands fa-html5"></i> html <i class="fa-brands fa-css3-alt"></i> css</p>
                         </div>
+                        </div>
+                        <br>
                         <br>
                         <center>
                         <p class="pd">dev & aviation enthusiast</p>
                         <br>
-                        <p class="pd"><b style="background: linear-gradient(to top right, #fa340c, #00db11); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">go gamble or sum</b>🍀</p>
-                        <br>
-                        <a href="https://github.com/KaladinDMP/AGBrowser"><p class="pd">Armgddn for pirated games.</p></a>
+                        <!--<p class="pd"><b style="background: linear-gradient(to top right, #fa340c, #00db11); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">go gamble or sum</b>🍀</p>-->
+                        <a href="https://github.com/KaladinDMP/AGBrowser"><p class="pd">Armgddn for pirated games</p></a>
                         <br>
                         <div class="volanta-activity">
                             <div class="volanta-box">
@@ -160,29 +161,35 @@
                         </div>
                         <p><span id="visitor-id" style="display: none;">Loading...</span></p>
                         <div><img src="media/eye.png" class="imeye"><p id="visitor-count"> 0</p></div>
+                        <div class="appreciation">
+                            <a href="https://open.spotify.com/artist/3hGJ4nHdF99Vs0gQdXz5Nw">Smokedope2016 ❤</a>
+                         </div>
                     </div>
                 </div>
-                <div class="audiobox">
+                <!--<div class="audiobox">
                     <i id="back-button" class="fa-solid fa-arrow-left"></i>
                     <i id="volume-button" class="fa-solid fa-volume-high"></i>
                     <a href="https://open.spotify.com/artist/3hGJ4nHdF99Vs0gQdXz5Nw">In Da Party - smokedope2016</a>
-                </div>
+                </div>-->
             </div>
         <!--<script src="particles.js"></script>-->
         <script src="App.js"></script>
         <script>
-            function updateTime() {
-                const now = new Date();
-                const hours = now.getUTCHours().toString().padStart(2, '0');
-                const minutes = now.getUTCMinutes().toString().padStart(2, '0');
-                const formattedTime = `${hours}:${minutes} UTC`;
-                
-                document.getElementById('utcTime').textContent = formattedTime;
-            }
+  function updateTime() {
+    const now = new Date();
 
-            updateTime();
-            setInterval(updateTime, 1000);
-        </script>
+    const formattedTime = now.toLocaleTimeString('en-IE', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    });
+
+    document.getElementById('utcTime').textContent = formattedTime;
+  }
+
+  updateTime();
+  setInterval(updateTime, 1000);
+</script>
         <script>
             const link1URL = "https://github.com/pl-lemonade/";
             const link2URL = "https://discord.com/users/1231252925397860354";
@@ -339,6 +346,29 @@
             volumeButton.classList.add("fa-volume-high");
         }
     });
-</script>                          
+</script>     
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const box = document.querySelector('.box');
+
+  box.addEventListener('mousemove', (e) => {
+    const rect = box.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * -8;
+    const rotateY = ((x - centerX) / centerX) * 8;
+
+    box.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1, 1, 1)`;
+  });
+
+  box.addEventListener('mouseleave', () => {
+    box.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+  });
+});
+</script>
     </body>
 </html>
