@@ -160,7 +160,7 @@
                             </div>
                         </div>
                         <p><span id="visitor-id" style="display: none;">Loading...</span></p>
-                        <div><img src="media/eye.png" class="imeye"><p id="visitor-count"> 0</p></div>
+                        <div><i class="fa-regular fa-eye"></i><p id="visitor-count" style="padding-left: 15px;"> 0</p></div>
                         <div class="appreciation">
                             <a href="https://open.spotify.com/artist/3hGJ4nHdF99Vs0gQdXz5Nw">Smokedope2016 ❤</a>
                          </div>
@@ -368,6 +368,14 @@ document.addEventListener('DOMContentLoaded', () => {
   box.addEventListener('mouseleave', () => {
     box.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
   });
+});
+</script>
+<script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
+<script type="module">
+  import { fairyDustCursor } from "https://unpkg.com/cursor-effects@latest/dist/esm.js";
+
+  new fairyDustCursor({
+  colors: ["#fff", "#000", "#E75A0A", "#FFFF00", "#808080"]
 });
 </script>
     </body>

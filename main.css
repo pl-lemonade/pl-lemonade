@@ -262,13 +262,11 @@ div.social {
     }
 }
 
-img.imeye {
+.fa-regular.fa-eye {
     position: relative;
-    height: 40px;
-    width: auto;
-    left: 5px;
-    margin-right: 5px;
-    bottom: -12px;
+    color: #fff;
+    font-size: 20px;
+    left: 10px;
 }
 
 div.volanta-box {
