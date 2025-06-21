@@ -3,7 +3,7 @@
         <title>Lemonade</title>
         <link rel="icon" type="image/x-icon" href="media/favicon.png">
         <link rel="stylesheet" href="main.css">
-        <!-- I dont know js, most js is provided by chatgpt haha -->
+        <!-- idk js, all scripts taken directly from other sources -->
         <script>
             var isChromium = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
         
@@ -15,10 +15,10 @@
         </script>  
         <script src="./marked.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
-<script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+        <script>
     const firebaseConfig = {
         apiKey: "AIzaSyA8KZH699uYiuDc8bpZ_6VNlu8oy9wii9g",
         authDomain: "portfolio-pl.firebaseapp.com",
@@ -38,7 +38,7 @@
         const ref = db.ref('visitors/' + visitorId);
         ref.set({ visitedAt: new Date().toISOString() })
             .then(() => {
-                console.log('Visitor ID saved successfully');
+                //console.log('Visitor ID saved successfully');
                 analytics.logEvent('visitor_saved', {
                     visitor_id: visitorId,
                     visited_at: new Date().toISOString(),
@@ -74,7 +74,7 @@
 
     visitorsRef.once('value', (snapshot) => {
         const visitorsData = snapshot.val();
-        console.log('All Visitors:', visitorsData);
+        //console.log('All Visitors:', visitorsData);
 
         const visitorCount = Object.keys(visitorsData || {}).length;
         document.getElementById('visitor-count').innerText = `${visitorCount}`;
@@ -86,15 +86,12 @@
     <body>
         <div id="enter-overlay">
             <div>
-              <p>Click to Enter</p>
+              <p id="eop">welcome</p>
             </div>
         </div>
         <video autoplay loop muted playsinline class="background-video">
             <source src="https://pl-lemonade.github.io/pl-lemonade/media/IN%20DA%20PARTY%20-%20CT.mp4" type="video/mp4">
             <img src="media/img-def-bg.png" class="background-image">
-            <!--
-            https://ibb.co/GHLqYQD
-            https://ibb.co/0f5X7Q8 -->
             
         </video>
         <!--<div style="position: absolute; top: 0; height: 100%; width: 100%;" id="particles-js">-->
@@ -107,11 +104,11 @@
                         <div class="info">
                         <div class="section">
                             <i class="fa-solid fa-location-dot"></i>
-                            <p>Ireland</p>
+                            <p>IE</p>
                         </div>
                         <div class="section">
                             <i class="fa-solid fa-clock"></i>
-                            <p id="utcTime">20:42 GMT</p>
+                            <p id="time">20:42 GMT</p>
                         </div>
                         <div class="section">
                             <i class="fa-solid fa-globe"></i>
@@ -123,44 +120,28 @@
                         </div>
                         </div>
                         <br>
-                        <br>
                         <center>
                         <p class="pd">dev & aviation enthusiast</p>
-                        <br>
+                        <br><br>
                         <!--<p class="pd"><b style="background: linear-gradient(to top right, #fa340c, #00db11); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">go gamble or sum</b>🍀</p>-->
-                        <a href="https://github.com/KaladinDMP/AGBrowser"><p class="pd">Armgddn for pirated games</p></a>
+                        <div class="und"><a class="pd a" href="https://github.com/KaladinDMP/AGBrowser">Armgddn for pirated software</a></div>
+                        <div class="und"><a class="pd a" href="https://github.com/JAQLIV/gunslol-open-source">Open src guns.lol / e-z.bio ...</a></div>
                         <br>
-                        <div class="volanta-activity">
-                            <div class="volanta-box">
-                                <p class="c1">ER</p>
-                                <p class="c2">ER</p>
-                                <p class="c3">ER</p>
-                                <p class="c4">ER</p>
-                                <p class="c5">ER</p>
-                                <p class="c6">ER</p>
-                                <p class="c7">ER</p>
-                                <p class="c8">ER</p>
-                                <center><p class="c9">--------------------------------</p>
-                                <p class="c10">ER</p>
-                                <p class="c11">ER</p></center>
-                            </div>
-                        </div>
-                        <br>
-                        <p class="pd" style="font-size: 15px;"><a href="https://attapoll.app/join/kljoa" style="color: #eb4e4e;">Attapoll</a> & <a href="https://cashinstyle.com/?ref=lemonade" style="color: #01a89e;">CashInStyle</a>🔥</p>
+                        <!--<p class="pd" style="font-size: 15px;"><a href="https://attapoll.app/join/kljoa" style="color: #eb4e4e;">Attapoll</a> & <a href="https://cashinstyle.com/?ref=lemonade" style="color: #01a89e;">CashInStyle</a>🔥</p>-->
                         </center>
                         <div class="social">
-                            <div class="link">
-                                <img src="media/github.png" class="imlink1">
-                            </div>
-                            <div class="link">
-                                <img src="media/discord.png" class="imlink2">
-                            </div>
-                            <div class="link">
-                                <img src="media/volanta.png" class="imlink3">
-                            </div>
+                            <a class="link" href="https://github.com/pl-lemonade/">
+                                <img src="media/github.png">
+                            </a>
+                            <a class="link" href="https://discord.com/users/1231252925397860354">
+                                <img src="media/discord.png">
+                            </a>
+                            <a class="link" href="https://fly.volanta.app/profile/kebinii/">
+                                <img src="media/volanta.png">
+                            </a>
                         </div>
-                        <p><span id="visitor-id" style="display: none;">Loading...</span></p>
-                        <div><i class="fa-regular fa-eye"></i><p id="visitor-count" style="padding-left: 15px;"> 0</p></div>
+                        <p><span id="visitor-id" style="display: none;"></span></p>
+                        <div><i class="fa-regular fa-eye"></i><p id="visitor-count" style="padding-left: 15px;"> ~Tracking interrupted</div>
                         <div class="appreciation">
                             <a href="https://open.spotify.com/artist/3hGJ4nHdF99Vs0gQdXz5Nw">Smokedope2016 ❤</a>
                          </div>
@@ -184,29 +165,12 @@
       hour12: false
     });
 
-    document.getElementById('utcTime').textContent = formattedTime;
+    document.getElementById('time').textContent = formattedTime;
   }
 
   updateTime();
   setInterval(updateTime, 1000);
 </script>
-        <script>
-            const link1URL = "https://github.com/pl-lemonade/";
-            const link2URL = "https://discord.com/users/1231252925397860354";
-            const link3URL = "https://fly.volanta.app/profile/kebinii/";
-    
-            document.querySelector('.imlink1').addEventListener('click', () => {
-                window.location.href = link1URL;
-            });
-    
-            document.querySelector('.imlink2').addEventListener('click', () => {
-                window.location.href = link2URL;
-            });
-
-            document.querySelector('.imlink3').addEventListener('click', () => {
-                window.location.href = link3URL;
-            });
-        </script>
         <script>
             var audio = new Audio('media/IN DA PARTY - CT.mp4');
             audio.loop = true;
@@ -221,111 +185,12 @@
         console.error("Error playing audio:", error);
     });
 
-    document.getElementById('enter-overlay').classList.add('fade-out');
+    const overlay = document.getElementById('enter-overlay');
+    overlay.classList.add('fade-out');
+    const eop = document.getElementById('eop');
+    eop.classList.add('fade-out');
 });
-          </script>
-          <script>
-            const url = "https://elaborate-pasca-31bf04.netlify.app/.netlify/functions/volanta-proxy";
-            const targetUser = "kebinii";
-            const userDataContainer = document.getElementById('user-data');
-            const volantaBox = document.querySelector('.volanta-box');
-        
-            async function getAirportNameFromCSV(icaoCode) {
-                if (!icaoCode) {
-                    return;
-                }
-                try {
-                    const response = await fetch("/media/iata-icao.csv");
-                    const csvData = await response.text();
-                    const rows = csvData.split('\n');
-                    
-                    for (let row of rows) {
-                        const columns = row.split(",");
-                        if (columns[3].replace(/"/g, "") === icaoCode) {
-                            let airportName = columns[4].replace(/"/g, ""); 
-                            airportName = airportName.replace(/\s*Airport\s*/gi, "").trim();
-                            return airportName;
-                        }
-                    }
-                    
-                    return "Airport not found";
-                } catch (error) {
-                    console.error("Error fetching or parsing CSV:", error);
-                    return "Error fetching airport name";
-                }
-            }
-        
-            function formatFlightStatus(verticalSpeed, onGround, altitude) {
-    if (onGround) {
-        return "On ground";
-    }
-
-    if (altitude < 15000) {
-        if (verticalSpeed < 600) {
-            return `Climbing at ${verticalSpeed} FPM`;
-        } else if (verticalSpeed > -600) {
-            return `Descending at ${verticalSpeed} FPM`;
-        } else {
-            return "Maintaining altitude";
-        }
-    }
-
-    if (verticalSpeed < -1000) {
-        return `Descending at ${verticalSpeed} FPM`;
-    } else if (verticalSpeed > 1000) {
-        return `Climbing at ${verticalSpeed} FPM`;
-    } else {
-        return "Cruising";
-    }
-}
-        
-            async function fetchVolantaData() {
-                try {
-                    const response = await fetch(url);
-                    const data = await response.json();
-            
-                    const user = data.data.find(entry => entry.networkUserName === targetUser);
-            
-                    if (user) {
-                        volantaBox.style.display = "block";
-                        
-                        const { callsign, flightNumber, aircraftRegistration, aircraftIcao, originIcao, destinationIcao, position, altitude, onGround } = user;
-            
-                        const originName = await getAirportNameFromCSV(originIcao);
-                        const destinationName = await getAirportNameFromCSV(destinationIcao);
-                        const verticalSpeed = Math.round(position.verticalSpeed);
-                        const flightStatus = formatFlightStatus(verticalSpeed, position.onGround);
-            
-                        document.querySelector('.c1').textContent = callsign;
-                        document.querySelector('.c2').textContent = flightNumber;
-                        document.querySelector('.c3').textContent = aircraftRegistration;
-                        document.querySelector('.c4').textContent = aircraftIcao;
-                        document.querySelector('.c5').textContent = originIcao;
-                        document.querySelector('.c6').textContent = originName;
-                        document.querySelector('.c7').textContent = destinationIcao;
-                        document.querySelector('.c8').textContent = destinationName;
-                        document.querySelector('.c10').textContent = `${position.altitude} FT`;
-                        document.querySelector('.c11').textContent = flightStatus;
-            
-                        userDataContainer.textContent = JSON.stringify(user, null, 2);
-                    } else {
-                        userDataContainer.textContent = `No data found.`;
-                        volantaBox.style.display = "none";
-                    }
-                } catch (error) {
-                    console.error("Error fetching data:", error);
-                    userDataContainer.textContent = "Error fetching data.";
-                    volantaBox.style.display = "none";
-                }
-            }
-
-    volantaBox.addEventListener('click', () => {
-        window.open("https://fly.volanta.app/profile/kebinii/", "_blank");
-    });
-            
-            fetchVolantaData();
-            setInterval(fetchVolantaData, 20000);
-        </script>     
+          </script>   
         <script>
     document.getElementById("back-button").addEventListener("click", function () {
         window.location.href = "/archived/220525/";
@@ -375,7 +240,8 @@ document.addEventListener('DOMContentLoaded', () => {
   import { fairyDustCursor } from "https://unpkg.com/cursor-effects@latest/dist/esm.js";
 
   new fairyDustCursor({
-  colors: ["#fff", "#000", "#E75A0A", "#FFFF00", "#808080"]
+  //colors: ["#fff", "#000", "#E75A0A", "#FFFF00", "#808080"]
+  colors: ["#fff", "#000"]
 });
 </script>
     </body>

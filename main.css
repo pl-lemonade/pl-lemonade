@@ -1,10 +1,26 @@
 :root {
     p, a {
         /* warm summer */
-        color: #aaa;
-    }
-    p.pst {
         color: #fff;
+        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6));
+    }
+
+    /* prevent double highlighting */
+    a:has(> p) p {
+        filter: none;
+    }
+
+    p.pst {
+        color: #E75A0A;
+    }
+
+    i.fa-solid, i.fa-regular {
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+    }
+
+    cursor: none;
+    a {
+        cursor: none;
     }
 }
 
@@ -74,18 +90,39 @@ body {
     text-align: center;
     z-index: 100;
     backdrop-filter: blur(20px);
+    cursor: none;
 
     p {
         color: #fff;
         font-family: "Autography";
-        font-size: 50px;
+        font-size: 100px;
+        visibility: visible;
+        transition: opacity 0.2s ease, visibility 0.2s ease;
     }
   }
   
-  #enter-overlay.fade-out {
-    opacity: 0;
-    visibility: hidden;
-  }
+#enter-overlay {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1s ease, visibility 1s ease;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(200px);
+}
+
+#enter-overlay.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+p#eop {
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 1));
+}
+
+#eop.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
 
 div.boxes {
     display: flex;
@@ -98,7 +135,7 @@ div.box {
     height: auto;
     width: 40%;
     max-width: var(--containerWidth);
-    background-color: rgba(42, 42, 42, 0.6);
+    background-color: rgba(42, 42, 42, 0.8);
     margin-top: 40px;
     border-radius: 20px;
     backdrop-filter: blur(2px);
@@ -110,13 +147,16 @@ div.box {
     align-items: center;
     gap: 15px;
     will-change: transform;
-     transition: 1200ms cubic-bezier(0.03, 0.98, 0.52, 0.99);
-     transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
+    transition: 1200ms cubic-bezier(0.03, 0.98, 0.52, 0.99);
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
+
+    box-shadow: 0 0 40px 10px #000;
+    border: 2px solid #fff;
 
     /*summer*/
-     box-shadow: 0 0 40px 10px rgba(176, 82, 29, 0.6);
+     /*box-shadow: 0 0 40px 10px rgba(176, 82, 29, 0.6);
      border: 1px solid #E75A0A;
-     animation: borderChange 8s linear infinite; 
+     animation: summer 8s linear infinite; */
 
     /*winter*/
     /*box-shadow: 0 0 40px 10px rgba(26, 109, 176, 0.6);
@@ -124,7 +164,7 @@ div.box {
     animation: winter 6s linear infinite;*/
 }
 
-@keyframes borderChange {
+@keyframes summer {
     0% {
         border-color: #E75A0A;
     }
@@ -178,6 +218,7 @@ p.pst {
     text-align: center;
     display: inline-block;
     margin: 0 auto;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 1));
 }
 
 .tav {
@@ -208,8 +249,28 @@ p, a {
     top: -20px;
 }
 
-.pd a {
-    font-size: 20px;
+.pd.a {
+    text-decoration: none;
+}
+
+.und {
+    a::after {
+    content: ""; 
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    border-radius: 50%;
+  }
+
+  a:hover::after {
+    transform: scaleX(1);
+  }
 }
 
 .info {
@@ -236,7 +297,6 @@ p, a {
 }
 
 .section {
-    position: relative;
 
     p {
         position: relative;
@@ -244,23 +304,79 @@ p, a {
 }
 
 div.social {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: nowrap;
-
-    img {
-        height: 25px;
-        width: auto;
-        cursor: pointer;
-    }
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
+
+div.social .link {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.social .link img {
+  height: 25px;
+  width: auto;
+}
+
+/* ai for smooth circles on hover */
+
+div.social .link::before {
+  content: ""; 
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: #fff;
+  pointer-events: none;
+
+  opacity: 0;
+  transition: opacity 2s ease;
+  
+  animation: spin 1s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+  animation-play-state: paused;
+}
+
+div.social .link:hover::before {
+  opacity: 1;
+  animation-play-state: running;
+}
+
+@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  5%   { transform: rotate(8deg); }
+  10%  { transform: rotate(18deg); }
+  15%  { transform: rotate(35deg); }
+  20%  { transform: rotate(55deg); }
+  25%  { transform: rotate(78deg); }
+  30%  { transform: rotate(102deg); }
+  35%  { transform: rotate(128deg); }
+  40%  { transform: rotate(154deg); }
+  45%  { transform: rotate(182deg); }
+  50%  { transform: rotate(215deg); }
+  55%  { transform: rotate(242deg); }
+  60%  { transform: rotate(266deg); }
+  65%  { transform: rotate(285deg); }
+  70%  { transform: rotate(300deg); }
+  75%  { transform: rotate(312deg); }
+  80%  { transform: rotate(322deg); }
+  85%  { transform: rotate(330deg); }
+  90%  { transform: rotate(338deg); }
+  95%  { transform: rotate(348deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* end */
 
 .fa-regular.fa-eye {
     position: relative;
@@ -269,115 +385,32 @@ div.social {
     left: 10px;
 }
 
-div.volanta-box {
-    display: none;
-
-    position: relative;
-    height: 80px;
-    width: 50%;
-    margin-bottom: 20px;
-    background-color: rgba(42, 42, 42, 0.6);
-    border-radius: 10px;
-    backdrop-filter: blur(5px);
-     box-shadow: 0 0 40px 10px rgba(176, 82, 29, 0.6);
-     border: 1px solid #E75A0A; 
-
-    /*box-shadow: 0 0 40px 10px rgba(26, 109, 176, 0.6);
-    border: 1px solid #7ab3ef;*/
-
-    p {
-        font-family: DIN1451;
-        font-size: 10px;
-    }
-}
-
-p.c1 {
-}
-
-p.c2 {
-    position: absolute;
-    left: 0px;
-}
-
-p.c3 {
-    position: absolute;
-    right: 0px;
-}
-
-p.c4 {
-    position: absolute;
-    top: 10px;
-    right: 0px;
-}
-
-p.c5 {
-    position: absolute;
-    top: 30px;
-    left: 0px;
-}
-
-p.c6 {
-    position: absolute;
-    top: 40px;
-    left: 0px;
-}
-
-p.c7 {
-    position: absolute;
-    top: 30px;
-    right: 0px;
-}
-
-p.c8 {
-    position: absolute;
-    top: 40px;
-    right: 0px;
-}
-
-p.c9 {
-    position: absolute;
-    top: 35px;
-    transform: translateX(-50%);
-}
-
-p.c10 {
-    position: absolute;
-    top: 30px;
-    transform: translateX(-50%);
-}
-
-p.c11 {
-    position: absolute;
-    top: 42px;
-    transform: translateX(-50%);
-}
-
-.audiobox {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 20px;
-}
-
-.audiobox i {
-    font-size: 25px;
-    margin-right: 20px;
-    color: #fff;
-    cursor: pointer;
-}
-
-.audiobox p, a {
-    font-size: 25px;
-    color: #fff;
-    text-decoration: none;
-}
-
 .appreciation {
-    position: absolute;
-    bottom: 0px;
-    right: 10px;
+  position: absolute;
+  bottom: 0;
+  right: 10px;
 
-    p, a {
+  p, a {
     font-size: 20px;
-}
+    text-decoration: none;
+    position: relative;
+  }
+
+  a::after {
+    content: ""; 
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    border-radius: 50%;
+  }
+
+  a:hover::after {
+    transform: scaleX(1);
+  }
 }
