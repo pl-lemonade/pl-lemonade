@@ -3,7 +3,7 @@
         <title>Lemonade</title>
         <link rel="icon" type="image/x-icon" href="media/favicon.png">
         <link rel="stylesheet" href="main.css">
-        <!-- idk js, all scripts taken directly from other sources -->
+        <!-- no i dont know js, all js scripts are from other sources and certain css transitions aswell -->
         <script>
             var isChromium = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
         
@@ -89,8 +89,13 @@
               <p id="eop">welcome</p>
             </div>
         </div>
+        <div id="hello-overlay">
+            <div>
+                <p id="hop">Hi, I'm Lemo</p>
+            </div>
+        </div>
         <video autoplay loop muted playsinline class="background-video">
-            <source src="https://pl-lemonade.github.io/pl-lemonade/media/IN%20DA%20PARTY%20-%20CT.mp4" type="video/mp4">
+            <source src="https://pl-lemonade.github.io/pl-lemonade/media/smokedope2016 - In Da Party - adj.mp4" type="video/mp4">
             <img src="media/img-def-bg.png" class="background-image">
             
         </video>
@@ -171,47 +176,41 @@
   updateTime();
   setInterval(updateTime, 1000);
 </script>
-        <script>
-            var audio = new Audio('media/IN DA PARTY - CT.mp4');
-            audio.loop = true;
-            audio.volume = 0.5;
-        
-            document.getElementById('enter-overlay').addEventListener('click', function () {
-    const video = document.querySelector('.background-video');
-    video.currentTime = 0;
-    video.play();
-
-    audio.play().catch(function (error) {
-        console.error("Error playing audio:", error);
-    });
-
+<script>
+document.addEventListener('DOMContentLoaded', function() {
     const overlay = document.getElementById('enter-overlay');
-    overlay.classList.add('fade-out');
+    const helloOverlay = document.getElementById('hello-overlay');
     const eop = document.getElementById('eop');
-    eop.classList.add('fade-out');
+    const video = document.querySelector('.background-video');
+    const audio = new Audio('media/smokedope2016 - In Da Party - adj.mov');
+    audio.loop = true;
+    audio.volume = 1;
+
+    overlay.addEventListener('click', function handleClick() {
+        video.currentTime = 0;
+        video.play();
+
+        audio.play().catch(error => console.error(error));
+
+        overlay.classList.add('fade-out');
+        eop.classList.add('fade-out');
+
+        helloOverlay.classList.add('show');
+        setTimeout(() => {
+            hop.classList.add('fade-in');
+        }, 600);
+
+        setTimeout(() => {
+            helloOverlay.classList.add('slide-down');
+            const box = document.querySelector('.box');
+            box.classList.add('show-box');
+            hop.classList.add('fade-out');
+        }, 2800);
+
+        overlay.removeEventListener('click', handleClick);
+    });
 });
-          </script>   
-        <script>
-    document.getElementById("back-button").addEventListener("click", function () {
-        window.location.href = "/archived/220525/";
-    });
-
-    const volumeButton = document.getElementById("volume-button");
-    let isMuted = false;
-
-    volumeButton.addEventListener("click", function () {
-        isMuted = !isMuted;
-        audio.muted = isMuted;
-
-        if (isMuted) {
-            volumeButton.classList.remove("fa-volume-high");
-            volumeButton.classList.add("fa-volume-off");
-        } else {
-            volumeButton.classList.remove("fa-volume-off");
-            volumeButton.classList.add("fa-volume-high");
-        }
-    });
-</script>     
+</script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const box = document.querySelector('.box');
