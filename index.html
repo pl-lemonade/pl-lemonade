@@ -126,7 +126,9 @@
                         </div>
                         <br>
                         <center>
-                        <p class="pd">dev & aviation enthusiast</p>
+                        <p class="pd">dev & cybersecurity enthusiast</p>
+                        <br>
+                        <p class="pd">aviation enthusiast</p>
                         <br><br>
                         <!--<p class="pd"><b style="background: linear-gradient(to top right, #fa340c, #00db11); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">go gamble or sum</b>🍀</p>-->
                         <div class="und"><a class="pd a" href="https://github.com/KaladinDMP/AGBrowser">Armgddn for pirated software</a></div>
@@ -177,37 +179,39 @@
   setInterval(updateTime, 1000);
 </script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const overlay = document.getElementById('enter-overlay');
-    const helloOverlay = document.getElementById('hello-overlay');
-    const eop = document.getElementById('eop');
-    const video = document.querySelector('.background-video');
-    const audio = new Audio('media/smokedope2016 - In Da Party - adj.mp4');
-    audio.loop = true;
-    audio.volume = 1;
+document.addEventListener('DOMContentLoaded', () => {
+  const overlay = document.getElementById('enter-overlay');
+  const helloOverlay = document.getElementById('hello-overlay');
+  const eop = document.getElementById('eop');
+  const hop = document.getElementById('hop');
+  const video = document.querySelector('.background-video');
+  const audio = new Audio('media/smokedope2016 - In Da Party - adj.mp4');
+  audio.loop = true;
+  audio.volume = 1;
 
-    overlay.addEventListener('click', function handleClick() {
+  const waitForCanPlayThrough = media =>
+    new Promise(res =>
+      media.readyState >= 4
+        ? res()
+        : media.addEventListener('canplaythrough', res, {once: true})
+    );
+
+  Promise.all([waitForCanPlayThrough(video), waitForCanPlayThrough(audio)])
+    .then(() => {
+      overlay.addEventListener('click', function handleClick () {
         video.currentTime = 0;
-        video.play();
-
-        audio.play().catch(error => console.error(error));
-
+        Promise.all([video.play(), audio.play()]).catch(console.error);
         overlay.classList.add('fade-out');
         eop.classList.add('fade-out');
-
         helloOverlay.classList.add('show');
+        setTimeout(() => hop.classList.add('fade-in'), 600);
         setTimeout(() => {
-            hop.classList.add('fade-in');
-        }, 600);
-
-        setTimeout(() => {
-            helloOverlay.classList.add('slide-down');
-            const box = document.querySelector('.box');
-            box.classList.add('show-box');
-            hop.classList.add('fade-out');
+          helloOverlay.classList.add('slide-down');
+          document.querySelector('.box').classList.add('show-box');
+          hop.classList.add('fade-out');
         }, 2800);
-
         overlay.removeEventListener('click', handleClick);
+      });
     });
 });
 </script>
