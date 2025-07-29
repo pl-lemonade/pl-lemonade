@@ -19,74 +19,107 @@
         <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app-check.js"></script>
-        <script>
+        <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-434WT5RY5Q"></script> -->
+<script>
 document.addEventListener('DOMContentLoaded', () => {
-    const firebaseConfig = {
-        apiKey: "AIzaSyA8KZH699uYiuDc8bpZ_6VNlu8oy9wii9g",
-        authDomain: "portfolio-pl.firebaseapp.com",
-        projectId: "portfolio-pl",
-        databaseURL: "https://portfolio-pl-default-rtdb.europe-west1.firebasedatabase.app/",
-        storageBucket: "portfolio-pl.firebasestorage.app",
-        messagingSenderId: "1038657748283",
-        appId: "1:1038657748283:web:8788546d1fb22129570b1e",
-        measurementId: "G-434WT5RY5Q"
-    };
+  const firebaseConfig = {
+    apiKey: "AIzaSyA8KZH699uYiuDc8bpZ_6VNlu8oy9wii9g",
+    authDomain: "portfolio-pl.firebaseapp.com",
+    projectId: "portfolio-pl",
+    databaseURL: "https://portfolio-pl-default-rtdb.europe-west1.firebasedatabase.app/",
+    storageBucket: "portfolio-pl.firebasestorage.app",
+    messagingSenderId: "1038657748283",
+    appId: "1:1038657748283:web:8788546d1fb22129570b1e",
+    measurementId: "G-434WT5RY5Q"
+  };
 
-    const app = firebase.initializeApp(firebaseConfig);
+  const app = firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+  const analytics = firebase.analytics();
 
-    const appCheck = firebase.appCheck();
-    appCheck.activate('6Lfs4JErAAAAANtllVNICBfKeZ6Ip-wYu3LyE1H-', true);
+  //DebugView for analytics - gtag
+  //window.dataLayer = window.dataLayer || [];
+  //function gtag(){ dataLayer.push(arguments); }
+  //gtag('js', new Date());
+  //gtag('config', 'G-434WT5RY5Q', { debug_mode: true });
 
-    const db = firebase.database();
-    const analytics = firebase.analytics();
+  const appCheck = firebase.appCheck();
+  appCheck.activate('6Lfs4JErAAAAANtllVNICBfKeZ6Ip-wYu3LyE1H-', true);
 
-    const saveVisitorId = (visitorId) => {
-        const ref = db.ref('visitors/' + visitorId);
-        ref.set({ visitedAt: new Date().toISOString() })
-            .then(() => {
-                //console.log('Visitor ID saved successfully');
-                analytics.logEvent('visitor_saved', {
-                    visitor_id: visitorId,
-                    visited_at: new Date().toISOString(),
-                });
-            })
-            .catch(error => {
-                console.error('Error saving visitor ID:', error);
-            });
-    };
+  const saveVisitorId = (visitorId) => {
+    const ref = db.ref('visitors/' + visitorId);
+    ref.set({ visitedAt: new Date().toISOString() })
+      .then(() => {
+        analytics.logEvent('visitor_saved', {
+          visitor_id: visitorId,
+          visited_at: new Date().toISOString(),
+        });
+      })
+      .catch(error => {
+        console.error('Error saving visitor ID:', error);
+      });
+  };
 
-    const fpPromise = FingerprintJS.load();
+  FingerprintJS.load()
+    .then(fp => fp.get())
+    .then(async result => {
+      const visitorId = result.visitorId;
+      console.log('Visitor ID:', visitorId);
 
-    fpPromise
-        .then(fp => fp.get())
-        .then(result => {
-            const visitorId = result.visitorId;
-            console.log('Visitor ID:', visitorId);
+      document.getElementById('visitor-id').innerText = `Visitor ID: ${visitorId}`;
 
-            document.getElementById('visitor-id').innerText = `Visitor ID: ${visitorId}`;
+      saveVisitorId(visitorId);
 
-            saveVisitorId(visitorId);
+      //security
 
-            analytics.logEvent('page_view', {
-                page_path: window.location.pathname,
-                page_title: document.title,
-            });
-        })
-        .catch(error => {
-            console.error('Error generating visitor ID:', error);
+      try {
+        const geoRes = await fetch("https://ipapi.co/json/");
+        const geo = await geoRes.json();
+
+        const securityRef = db.ref('security/' + visitorId);
+        await securityRef.set({
+          ip: geo.ip,
+          asn: geo.asn,
+          org: geo.org,
+          utc_timestamp: new Date().toISOString()
         });
 
-    const visitorsRef = db.ref('visitors');
-    const addon = 220; //custom offset
+        // end of security
+        //analytics
 
-    visitorsRef.once('value', (snapshot) => {
-        const visitorsData = snapshot.val();
-        //console.log('All Visitors:', visitorsData);
+        analytics.logEvent('visitor_geo', {
+          visitor_id: visitorId,
+          ip_location_city: geo.city || "unknown",
+          ip_location_region: geo.region || "unknown",
+          ip_location_country: geo.country_name || "unknown",
+          ip_location_timezone: geo.timezone || "unknown",
+          local_time: new Date().toLocaleString(),
+          utc_timestamp: new Date().toISOString()
+        });
+      } catch (err) {
+        console.error('Error fetching geo or logging:', err);
+      }
 
-        const visitorCount = Object.keys(visitorsData || {}).length;
-        const totalCount = visitorCount + addon;
-        document.getElementById('visitor-count').innerText = `${totalCount}`;
+      // end of analytics
+
+      analytics.logEvent('page_view', {
+        page_path: window.location.pathname,
+        page_title: document.title,
+      });
+    })
+    .catch(error => {
+      console.error('Error generating visitor ID:', error);
     });
+
+  const visitorsRef = db.ref('visitors');
+  const addon = 250; // custom offset for analytics
+
+  visitorsRef.once('value', (snapshot) => {
+    const visitorsData = snapshot.val();
+    const visitorCount = Object.keys(visitorsData || {}).length;
+    const totalCount = visitorCount + addon;
+    document.getElementById('visitor-count').innerText = `${totalCount}`;
+  });
 });
 </script>
 <script src="https://kit.fontawesome.com/1304c38665.js" crossorigin="anonymous"></script>
