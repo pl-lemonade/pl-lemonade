@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       })
       .catch(error => {
-        console.error('Error saving visitor ID:', error);
+        //console.error('Error saving visitor ID:', error);
       });
   };
 
@@ -76,6 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const geoRes = await fetch("https://ipapi.co/json/");
         const geo = await geoRes.json();
 
+        const seciplog = false;
+        if (seciplog) {
         const securityRef = db.ref('security/' + visitorId);
         await securityRef.set({
           ip: geo.ip,
@@ -83,21 +85,27 @@ document.addEventListener('DOMContentLoaded', () => {
           org: geo.org,
           utc_timestamp: new Date().toISOString()
         });
+      }
 
         // end of security
         //analytics
+
+        const browserTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const ipTz = geo.timezone;
+
+        const TzMismatch = browserTz !== ipTz;
+
+        if (!TzMismatch) {
 
         analytics.logEvent('visitor_geo', {
           visitor_id: visitorId,
           ip_location_city: geo.city || "unknown",
           ip_location_region: geo.region || "unknown",
           ip_location_country: geo.country_name || "unknown",
-          ip_location_timezone: geo.timezone || "unknown",
-          local_time: new Date().toLocaleString(),
-          utc_timestamp: new Date().toISOString()
+          ip_location_timezone: geo.timezone || "unknown"
         });
-      } catch (err) {
-        console.error('Error fetching geo or logging:', err);
+      }} catch (err) {
+        //console.error('Security/Analytics Error:', err);
       }
 
       // end of analytics
@@ -108,11 +116,11 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     })
     .catch(error => {
-      console.error('Error generating visitor ID:', error);
+      //console.error('Error generating visitor ID:', error);
     });
 
   const visitorsRef = db.ref('visitors');
-  const addon = 250; // custom offset for analytics
+  const addon = 250; // custom offset
 
   visitorsRef.once('value', (snapshot) => {
     const visitorsData = snapshot.val();
