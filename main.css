@@ -11,7 +11,7 @@
     }
 
     p.pst {
-        color: #E75A0A;
+        color: #7ab3ef; /* #E75A0A */
     }
 
     i.fa-solid, i.fa-regular {
@@ -21,6 +21,10 @@
     cursor: none;
     a {
         cursor: none;
+    }
+
+    ::selection {
+      background: #808080;
     }
 }
 
@@ -63,6 +67,8 @@ body {
     height: auto;
     z-index: -1;
     object-fit: contain;
+
+    filter: blur(10px) grayscale(1);
 }
 
 .background-image {
@@ -225,7 +231,7 @@ p.pst {
     text-align: center;
     display: inline-block;
     margin: 0 auto;
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 1));
+    filter: drop-shadow(0 0 8px rgba(141, 183, 227, 1)); /* 255 */
 }
 
 .tav {
@@ -396,31 +402,42 @@ div.social .link:hover::before {
   position: absolute;
   bottom: 0;
   right: 10px;
-
-  p, a {
-    font-size: 20px;
-    text-decoration: none;
-    position: relative;
-  }
-
-  a::after {
-    content: ""; 
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 2px;
-    width: 100%;
-    background-color: currentColor;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-    border-radius: 50%;
-  }
-
-  a:hover::after {
-    transform: scaleX(1);
-  }
 }
+
+.appreciation p,
+.appreciation a {
+  font-size: 20px;
+  text-decoration: none;
+  position: relative;
+}
+
+.appreciation a::after {
+  content: ""; 
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  border-radius: 50%;
+}
+
+.appreciation a:hover::after {
+  transform: scaleX(1);
+}
+
+.heart {
+  transition: color 0.4s ease-in-out;
+}
+
+.appreciation a:hover .heart {
+  color: #ff0055;
+  filter: drop-shadow(0 0 8px rgba(161, 3, 56, 1));
+}
+
 
 #hello-overlay {
   position: fixed;
