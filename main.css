@@ -91,12 +91,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, 0.8);
     font-size: 24px;
     text-align: center;
     z-index: 100;
-    backdrop-filter: blur(20px);
-    cursor: none;
+    cursor: pointer;
 
     p {
         color: #fff;
@@ -111,8 +109,7 @@ body {
   opacity: 1;
   visibility: visible;
   transition: opacity 1s ease, visibility 1s ease;
-  background-color: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(200px);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 #enter-overlay.fade-out {
@@ -448,7 +445,6 @@ div.social .link:hover::before {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.8);
   font-size: 24px;
   text-align: center;
   z-index: 101;

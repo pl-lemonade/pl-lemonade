@@ -145,17 +145,14 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </div>
         <video autoplay loop muted playsinline class="background-video">
-            <source src="https://pl-lemonade.github.io/pl-lemonade/media/smokedope2016 - In Da Party - adj.mp4" type="video/mp4">
-            <img src="media/img-def-bg.png" class="background-image">
+            <source src="/media/blue.mp4" type="video/mp4">
             
         </video>
-        <!--<div style="position: absolute; top: 0; height: 100%; width: 100%;" id="particles-js">-->
             <div class="boxes">
                 <div class="box">
                     <div class="top">
                         <p class="pst">Lemonade</p>
                         <br>
-                        <!--<img class="tav" src="https://pl-lemonade.github.io/pl-lemonade/media/images-_1_.png">-->
                         <div class="info">
                         <div class="section">
                             <i class="fa-solid fa-location-dot"></i>
@@ -176,16 +173,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         <br>
                         <center>
-                        <p class="pd">dev, cybersecurity, aviation enthusiast</p>
-                        <!--<br>
-                        <p class="pd">aviation enthusiast</p>-->
-                        <br><br>
-                        <!--<p class="pd"><b style="background: linear-gradient(to top right, #fa340c, #00db11); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">go gamble or sum</b>🍀</p>-->
-                        <div class="und"><a class="pd a" href="https://github.com/KaladinDMP/AGBrowser">Armgddn for pirated software</a></div>
-                        <!--<div class="und"><a class="pd a" href="https://github.com/JAQLIV/gunslol-open-source">Open src guns.lol / e-z.bio ...</a></div>-->
-                        <!-- vein.gg -->
+                        <p class="pd">i dont do much shit</p>
                         <br>
-                        <!--<p class="pd" style="font-size: 15px;"><a href="https://attapoll.app/join/kljoa" style="color: #eb4e4e;">Attapoll</a> & <a href="https://cashinstyle.com/?ref=lemonade" style="color: #01a89e;">CashInStyle</a>🔥</p>-->
+                        <div class="und"><a class="pd a" href="https://github.com/KaladinDMP/AGBrowser">Armgddn for pirated software</a></div>
+                        <br>
                         </center>
                         <div class="social">
                             <a class="link" href="https://discord.com/users/1231252925397860354">
@@ -198,19 +189,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         <p><span id="visitor-id" style="display: none;"></span></p>
                         <div><i class="fa-regular fa-eye"></i><p id="visitor-count" style="padding-left: 15px;"> ~Tracking interrupted</div>
                         <div class="appreciation">
-                          <a href="https://open.spotify.com/artist/3hGJ4nHdF99Vs0gQdXz5Nw">Smokedope2016 <span class="heart">❤</span>
+                          <a href="https://open.spotify.com/artist/699OTQXzgjhIYAHMy9RyPD">24 Songs - Carti <span class="heart">❤</span>
                           </a>
                       </div>
                     </div>
                 </div>
-                <!--<div class="audiobox">
-                    <i id="back-button" class="fa-solid fa-arrow-left"></i>
-                    <i id="volume-button" class="fa-solid fa-volume-high"></i>
-                    <a href="https://open.spotify.com/artist/3hGJ4nHdF99Vs0gQdXz5Nw">In Da Party - smokedope2016</a>
-                </div>-->
             </div>
-        <!--<script src="particles.js"></script>-->
-        <script src="App.js"></script>
         <script>
   function updateTime() {
     const now = new Date();
@@ -234,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const eop = document.getElementById('eop');
   const hop = document.getElementById('hop');
   const video = document.querySelector('.background-video');
-  const audio = new Audio('media/smokedope2016 - In Da Party - adj.mp4');
+  const audio = new Audio('media/24 Songs.mp3');
   audio.loop = true;
   audio.volume = 0.2;
 
@@ -248,7 +232,8 @@ document.addEventListener('DOMContentLoaded', () => {
   Promise.all([waitForCanPlayThrough(video), waitForCanPlayThrough(audio)])
     .then(() => {
       overlay.addEventListener('click', function handleClick () {
-        video.currentTime = 0;
+        //video.currentTime = 0;
+        audio.currentTime = 21; // start at
         Promise.all([video.play(), audio.play()]).catch(console.error);
         overlay.classList.add('fade-out');
         eop.classList.add('fade-out');
